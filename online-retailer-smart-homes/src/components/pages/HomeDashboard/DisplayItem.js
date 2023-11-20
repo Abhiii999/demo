@@ -5,6 +5,7 @@ const DisplayItem = ({ item, onClick }) => {
   return (
     <div style={styles.container}>
       {item.name}
+      <div>{`$${item.price.toFixed(2)}`}</div>
       <img src={item?.image} alt={item.name} style={styles.image} />
       <Button
         buttonName="Add to Cart"
