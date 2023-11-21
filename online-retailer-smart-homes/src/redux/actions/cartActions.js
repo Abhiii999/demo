@@ -48,6 +48,11 @@ const setOrders = (orders) => ({
   payload: orders,
 });
 
+const setProducts = (products) => ({
+  type: "SET_PRODUCTS",
+  payload: products,
+});
+
 export {
   addToCart,
   removeFromCart,
@@ -59,4 +64,5 @@ export {
   updateProduct,
   addProduct,
   setOrders,
+  setProducts,
 };

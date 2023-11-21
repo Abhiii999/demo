@@ -2,14 +2,12 @@ import React from "react";
 import DisplayItem from "./DisplayItem";
 import { useSelector } from "react-redux";
 
-const DisplayItems = ({ category, handleCart,requiredProducts }) => {
+const DisplayItems = ({ category, handleCart }) => {
   
-  // const { products } = useSelector((state) => state.cartReducer);
-  // const requiredProducts = products.filter(
-  //   (item) => item.category === category.id
-  // );
-
-
+  const { products } = useSelector((state) => state.cartReducer);
+  const requiredProducts = products.filter(
+    (item) => item.category === category.id
+  );
 
   return (
     <div>

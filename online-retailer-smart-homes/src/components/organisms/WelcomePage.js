@@ -46,8 +46,6 @@ const WelcomePage = () => {
     }
   }, [isOrderCanceled, user?.usertype]);
 
-
-  console.log(orders);
   const handleCancelOrder = (orderId) => {
     setIsOrderCanceled(true);
     // dispatch(cancelOrder(orderId));
@@ -75,12 +73,30 @@ const WelcomePage = () => {
     alert(`Canceled Order ${orderId}`);
   };
 
-
-
-  
   
   const handleDeleteProduct = (productId) => {
-    dispatch(removeProduct(productId));
+    
+    fetch('http://localhost:3001/delete-product',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        // Add any other headers as needed
+  
+      },
+      body: JSON.stringify({id: productId}),
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Handle the response, e.g., update state or perform other actions
+        console.log('Response from server:', data);
+        dispatch(removeProduct(productId));
+      })
+      .catch(error => {
+        // Handle errors, e.g., display an error message
+        console.error('Error making POST request:', error.message);
+      });
+  
     alert(`Product deleted ${productId}`);
   };
 

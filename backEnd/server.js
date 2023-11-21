@@ -140,6 +140,67 @@ app.post('/delete-order', (req, res) => {
 });
 //delete order API
 
+//delete product API
+app.post('/delete-product', (req, res) => {
+
+  const requestData = req.body;
+  console.log("delete product",req.body);
+  const query = 'Delete FROM productdetails WHERE ?';
+
+  
+  db.query(query, requestData, (error, results) => {
+    if (error) {
+      console.error('Error executing MySQL query:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
+    }
+    console.log(results);
+    res.json({ msg: 'product deleted' });
+  });
+});
+//delete product API
+
+
+//edit product API
+app.post('/edit-product', (req, res) => {
+
+  const requestData = req.body;
+  console.log("edit product",req.body);
+  const query = 'UPDATE productdetails SET ? WHERE ?';
+
+  
+  db.query(query, [requestData, {id: requestData.id}], (error, results) => {
+    if (error) {
+      console.error('Error executing MySQL query:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
+    }
+    console.log(results);
+    res.json({ msg: 'product updated' });
+  });
+});
+//edit product API
+
+//add product API
+app.post('/add-product', (req, res) => {
+
+  const requestData = req.body;
+  console.log("add product",req.body);
+  const query = 'INSERT INTO productdetails SET ?';
+
+  
+  db.query(query, requestData, (error, results) => {
+    if (error) {
+      console.error('Error executing MySQL query:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
+    }
+    console.log(results);
+    res.json({ msg: 'product added' });
+  });
+});
+//add product API
+
 //product read API
 app.get('/products', (req, res) => {
   // Replace 'your_table' with your actual table name

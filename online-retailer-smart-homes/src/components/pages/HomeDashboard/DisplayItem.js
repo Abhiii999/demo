@@ -2,11 +2,13 @@ import React from "react";
 import { Button } from "../../organisms";
 
 const DisplayItem = ({ item, onClick }) => {
+  const imageFilenames = require.context('../../../assets/images', false, /\.(png|jpe?g|svg)$/);
+  
   return (
     <div style={styles.container}>
       {item.name}
       <div>{`$${item.price.toFixed(2)}`}</div>
-      <img src={item?.image} alt={item.name} style={styles.image} />
+      <img src={imageFilenames(`./${item.image}`)} alt={item.name} style={styles.image} />
       <Button
         buttonName="Add to Cart"
         buttonStyles={styles.buttonStyle}

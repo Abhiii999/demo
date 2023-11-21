@@ -10,7 +10,7 @@ const initialState = {
   selectedCategory: {},
   orders: [],
   currentOrderId: 0,
-  products: items,
+  products: [],
 };
 
 
@@ -40,6 +40,8 @@ const cartReducer = (state = initialState, action) => {
       };
     case "ADD_PRODUCT":
       return { ...state, products: [...state.products, action.payload] };
+    case "SET_PRODUCTS":
+      return { ...state, products: action.payload };
     case "DELETE_PRODUCT":
       return {
         ...state,
