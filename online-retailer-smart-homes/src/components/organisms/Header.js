@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 
 import { useNavigate } from "react-router-dom";
 import {
@@ -59,6 +60,134 @@ const Header = () => {
     handleLoginModal();
   };
 
+  const items = [
+    {
+      id: "db1",
+      name: "Remo Doorbell"
+    },
+    {
+      id: "db2",
+      name: "Remo Doorbell Mini"
+    },
+    {
+      id: "db3",
+      name: "Blink Doorbell"
+    },
+    {
+      id: "db4",
+      name: "Blink Doorbell Mini"
+    },
+    {
+      id: "db5",
+      name: "Ring Doorbell"
+    },
+    {
+      id: "db6",
+      name: "Ring Doorbell Mini"
+    },
+    {
+      id: "dl1",
+      name: "Door Lock 1"
+    },
+    {
+      id: "dl2",
+      name: "Door Lock 2"
+    },
+    {
+      id: "dl3",
+      name: "Door Lock 3"
+    },
+    {
+      id: "dl4",
+    name: "Door Lock 4"
+    },
+    {
+      id: "dl5",
+      name: "Door Lock 5"
+    },
+    {
+      id: "s1",
+      name: "Echo Speaker"
+    },
+    {
+      id: "s2",
+      name: "Echo nextgen"
+    },
+    {
+      id: "s3",
+      name: "Homepod"
+    },
+    {
+      id: "s4",
+      name: "Homepod Mini"
+    },
+    {
+      id: "s5",
+      name: "nest"
+    },
+    {
+      id: "l1",
+    name: "Smart Light"
+    },
+    {
+      id: "l2",
+    name: "Smart Light nextgen"
+    },
+    {
+      id: "l3",
+    name: "Smart Light Mini"
+    },
+    {
+      id: "l4",
+    name: "Smart Light Mini 2"
+    },
+    {
+      id: "t1",
+    name: "EchoBees Thermostat"
+    },
+    {
+      id: "t2",
+    name: "Nest Thermostat"
+    },
+    {
+      id: "t3",
+    name: "Nest Thermostat Mini"
+    },
+    {
+      id: "t4",
+    name: "Honeywell Thermostat"
+    }
+  ]
+
+
+  const handleOnSearch = (string, results) => {
+    // onSearch will have as the first callback parameter
+    // the string searched and for the second the results.
+    console.log(string, results)
+  }
+
+  const handleOnHover = (result) => {
+    // the item hovered
+    console.log(result)
+  }
+
+  const handleOnSelect = (item) => {
+    // the item selected
+    console.log(item)
+  }
+
+  const handleOnFocus = () => {
+    console.log('Focused')
+  }
+
+  const formatResult = (item) => {
+    return (
+      <>
+        <span style={{ display: 'block', textAlign: 'left' }}>{item.name}</span>
+      </>
+    )
+  }
+
   return (
     <div style={headerStyle}>
       {!isEmpty(loggedInUserId) ? (
@@ -95,6 +224,17 @@ const Header = () => {
           )}
         />
       )}
+      <div style={{width:400}}>
+      <ReactSearchAutocomplete
+            items={items}
+            onSearch={handleOnSearch}
+            onHover={handleOnHover}
+            onSelect={handleOnSelect}
+            onFocus={handleOnFocus}
+            autoFocus
+            formatResult={formatResult}
+          />
+          </div>
       <Button
         buttonName={`Cart (${cart?.length})`}
         onClick={() => handleNavigation("cart")}
@@ -107,4 +247,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Header;
