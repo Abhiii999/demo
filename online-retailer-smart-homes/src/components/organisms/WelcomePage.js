@@ -10,6 +10,7 @@ import Register from "../pages/Login/Register";
 import UpdateProduct from "../pages/Login/UpdateProductModal";
 import { setOrders } from "../../redux/actions/cartActions";
 import apiService from "../../constants/apiService";
+import AddProduct from "../pages/Login/AddProductModal";
 
 const WelcomePage = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,10 @@ const WelcomePage = () => {
   const requiredProducts = products?.filter(
     (item) => item.category.toString() === categoryId
   );
+
+  //add modal
+  const [showAddProductForm, setShowAddProductForm] = useState(false);
+  //add modal
 
   const [isOrderCanceled, setIsOrderCanceled] = useState(true);
 
@@ -109,6 +114,12 @@ const WelcomePage = () => {
     setSelectedProduct(product);
   };
 
+  const handleAddModal = () => {
+    setShowAddProductForm(!showAddProductForm);
+    
+  };
+
+
   const renderCustomerHome = () => (
     <div style={styles.container}>
       <h1>Welcome To Smart Homes</h1>
@@ -125,7 +136,7 @@ const WelcomePage = () => {
       <Button
         buttonName="Add Product"
         buttonStyles={{ ...styles.buttonStyle, marginLeft: 40, marginTop: 40 }}
-        // onClick={handleRegisterModal}
+        onClick={handleAddModal}
       />
       <div style={styles.formItem}>
         <label htmlFor="delivery-action" style={styles.label}>
@@ -171,6 +182,13 @@ const WelcomePage = () => {
         setModalOpen={setShowProductUpdateForm}
         product={selectedProduct}
       />
+      
+      <AddProduct
+        isOpen={showAddProductForm}
+        setModalOpen={setShowAddProductForm}
+      />
+
+
     </div>
   );
 

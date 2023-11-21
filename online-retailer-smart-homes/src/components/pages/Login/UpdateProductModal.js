@@ -10,7 +10,7 @@ const UpdateProduct = ({ isOpen, setModalOpen, product }) => {
 
   const handleRegisterNavigation = () => {
     setModalOpen(!isOpen);
-    setModalOpen && onModalClose();
+    isOpen && onModalClose();
   };
 
   console.log("update product", productDetails);
